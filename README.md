@@ -74,4 +74,4 @@ This framework is meant as a template and structured as follows
 
 ## How to get started
 
-The template contains a demo study based on [[https://aviz.fr/blinded|this work]] to get you started. Make sure have read the description of the file system above; especially concerning the directories pages and setup. Comments within the files should help understand how the framework works and how to adapt the existing code to your case.
+The template contains a demo study based on [this work](https://aviz.fr/blinded) to get you started. Make sure to have read the description of the file system above; especially concerning the directories pages and setup. Comments within the files should help understand how the framework works and how to adapt the existing code to your case.
