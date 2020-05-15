@@ -1,5 +1,5 @@
-# online-study-framework
-A small framework to help realize online studies with explicit support for Prolific. The only requirement is a server running PHP.
+# Framework for Running Online Experiments
+FROE is a small framework to help realize online studies with explicit support for Prolific. The only requirement is a server running PHP.
 
 ## Provenance of this framework
 This framework came together over the course of several years as a result of running different studies on different platforms such Amazon Mechanical Turk, Crowdflower, and lately Prolific. Since the latter is explicitly intended for running online studies, this framework only directly supports Prolific. However, it could be easily adapted to run with other platforms.
