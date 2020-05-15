@@ -33,7 +33,7 @@ There are four steps to use this framework for the preparation of a study:
 1. Generate the pages required, that is, each page shown to a participant needs to have a separate file which should be placed in one of the folders within in html/pages directory. See the file html/pages/questions/attention.php as an example of a page that shows options to participants and logs a response.
 1 . Specify the logic of which page follows which by editing the file html/setup/pages_behavior.php
 1. Go through the files in the directory html/setup to adjust all parameters to values that make sense for your experiment. If you need to load any javascript required to run your study, then you can do so using the file load_js.php. This file is included after a participant is assigned to a condition and the variable $condition as well as $factor1 (and $factor2 if used) can be used to only load files relevant for the condition to which the participant was assigned. 
-1. Test your study design extensively. Locally, you can use a development environment such MAMP to serve the study pages and to test whether the logging works as it should. If you use MAMP, set the server directory in the preferences to the base directory of your study, that is, the level at which you can find this read.me file. Then start the server and open the page http://localhost/index.php?PROLIFIC_PID=1&SESSION_ID=1&STUDY_ID=1&debug in your browser. The GET parameter &debug deactivates the reload check.
+1. Test your study design extensively. Locally, you can use a development environment such MAMP to serve the study pages and to test whether the logging works as it should. If you use MAMP, set the server directory in the preferences to the base directory of your study, that is, the level at which you can find this read.me file. Then start the server and open the page http://localhost/index.php?PROLIFIC_PID=1&SESSION_ID=1&STUDY_ID=1&debug in your browser. The GET parameter &debug deactivates the reload check and replaces the participant ID in the log files with the name DEBUG.
 
 Then there are three more steps to get your study to run on Prolific:
 
@@ -44,7 +44,7 @@ Then there are three more steps to get your study to run on Prolific:
 
 ## Description of the directory structure
 
-This framework is structured as follows
+This framework is meant as a template and structured as follows
 
 - html: All html/php code as well as javascript and css goes here
 	- ajax: directory containing php code to log data sent back from participants. There should be no need to edit any of the files in there.
@@ -71,3 +71,7 @@ This framework is structured as follows
 - results: directory containing all result files
 	- individual: directory containing individual log files for each participant
 	- results.csv: Your results will end up in this file. It doesn't exist until at least one person completes the experiment.
+
+## How to get started
+
+The template contains a demo study based on [[https://aviz.fr/blinded|this work]] to get you started. Make sure have read the description of the file system above; especially concerning the directories pages and setup. Comments within the files should help understand how the framework works and how to adapt the existing code to your case.
