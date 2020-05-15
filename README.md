@@ -46,7 +46,6 @@ Then there are three more steps to get your study to run on Prolific:
 
 This framework is structured as follows
 
-- data: Any data that your experiment may need to run goes here, for example, data required to generate visualizations as stimuli.
 - html: All html/php code as well as javascript and css goes here
 	- ajax: directory containing php code to log data sent back from participants. There should be no need to edit any of the files in there.
 	- components: directory containing reusable components, that is, interface elements such as sliders, notifactions etc.

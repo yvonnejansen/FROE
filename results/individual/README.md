@@ -1,0 +1,1 @@
+Result files for individual participants will appear here. These are only meant for debugging or to understand where participants in an experiment participants drop out.
