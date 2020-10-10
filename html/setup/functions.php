@@ -7,10 +7,15 @@ $factor2 = null;
 function assignFactorLevels() {
   global $order_value, $factor1, $factor2, $NUM_CONDITIONS, $FACTOR_LEVELS;
 
-  if (function_exists('random_int')){
-    $order_value = random_int(0, $NUM_CONDITIONS - 1);
+  // check if $order_value was already set through a GET parameter
+  if (isset($order_value)){
+    // don't do anything
   } else {
-    $order_value = rand(0,$NUM_CONDITIONS - 1);
+    if (function_exists('random_int')){
+      $order_value = random_int(0, $NUM_CONDITIONS - 1);
+    } else {
+      $order_value = rand(0,$NUM_CONDITIONS - 1);
+    }
   }
 
   switch ($order_value) {

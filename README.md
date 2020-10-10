@@ -76,3 +76,15 @@ This framework is meant as a template and structured as follows
 ## How to get started
 
 The template contains a demo study based on [this work](https://aviz.fr/blinded) to get you started. Make sure to have read the description of the file system above; especially concerning the directories pages and setup. Comments within the files should help understand how the framework works and how to adapt the existing code to your case.
+
+## URL parameters
+
+There are a few URL parameters for different purposes such as testing before deploying an experiment. URL parameters are added after the main URL and a ? and can be combined together with the & character. For example localhost?debug&condition=1. Below a list of currently defined URL parameters.
+
+- debug: disables the reload check and the check for the presence of the URL parameters sent by Prolific. Always use this one during the development phase.
+- pilot: disables the check for the presence of the URL parameters sent by Prolific. That way, logging works normally (one line for every person loading the page) but you can pilot outside of the Prolific platform.
+- condition: this parameter requires a value (e.g., condition=0) and allows to control which factor combination is selected. By default condition is assigned randomly when the page is loaded. This parameter allows to force a specific condition. This is most useful during testing.
+- page: this parameter requires a value (e.g., page = 5) and allows to control on which page of the experiment should be displayed when loaded. This is a debugging feature and allows one to immediately see a page one is working on without having to click through all pages.
+- PROLIFIC_PID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study)
+- STUDY_ID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study)
+- SESSION_ID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study)

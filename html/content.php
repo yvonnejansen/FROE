@@ -80,6 +80,13 @@
     $is_pilot = 0;
   }
 
+  if (isset($_GET["condition"])) {
+    $order_value = $_GET["condition"];
+  }
+  if (isset($_GET["page"])) {
+    $start_page = max(1, intval($_GET["page"]));
+  }
+
 ?>
   <div class ="container" id="missing-parameter-container" style="display:none;">
     <h1>Invalid link</h1>
@@ -157,10 +164,10 @@ assignFactorLevels();
        $button = $PAGE_ORDER[$i]["button"];
        $id = $PAGE_ORDER[$i]["id"];
        $page_number = $i + 1;
-       if ($i>0){
+       // if ($i>0){
         $pages_to_hide .= '#' . $id;
-       }
-       if ($i > 0 && $i < count($PAGE_ORDER)-1){
+       // }
+       if ($i < count($PAGE_ORDER)-1){
         $pages_to_hide .= ", ";
        }
        $next = $PAGE_ORDER[$i]["next"];
@@ -176,6 +183,9 @@ assignFactorLevels();
   <script src="js/init-logging.js" charset="utf-8"></script>
   <script type="text/javascript">
 
+    var is_debug = $('#is_debug').val();
+    console.log("Debugging --> " + is_debug);
+    if (is_debug) console.log("condition: " + $('#condition').val());
 
     function getCookie(cname) {
       var name = cname + "=";
@@ -204,12 +214,11 @@ assignFactorLevels();
       return ret;
     }
 
+
     // if the constant $EXCLUDE_RELOADERS is set to true, check if a cookie has been set already
     if ($('#exclude_reloaders').val() > 0){
       if (checkCookie()){
         document.cookie = "prolific_study=" +  $('#participant_id').val() + "; max-age=" + 60*60*24*7;
-        var is_debug = $('#is_debug').val();
-        console.log("Debugging --> " + is_debug);
         if (getCookie("accepted") == 1 && is_debug < 1) {
           $("main").hide();
           $("#reloader-container").show();
@@ -222,6 +231,13 @@ assignFactorLevels();
     }
 
     $('<?php echo $pages_to_hide;?>').hide();
+    <?php  
+    if (isset($start_page)){
+      echo "$('#" . $PAGE_ORDER[$start_page - 1]["id"] . "').show();";
+    } else {
+      echo "$('#" . $PAGE_ORDER[0]["id"] . "').show();";
+    }
+    ?>
 
 
     function missingParameters() {
