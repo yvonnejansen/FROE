@@ -85,6 +85,6 @@ There are a few URL parameters for different purposes such as testing before dep
 - pilot: disables the check for the presence of the URL parameters sent by Prolific. That way, logging works normally (one line for every person loading the page) but you can pilot outside of the Prolific platform.
 - condition: this parameter requires a value (e.g., condition=0) and allows to control which factor combination is selected. By default condition is assigned randomly when the page is loaded. This parameter allows to force a specific condition. This is most useful during testing.
 - page: this parameter requires a value (e.g., page = 5) and allows to control on which page of the experiment should be displayed when loaded. This is a debugging feature and allows one to immediately see a page one is working on without having to click through all pages.
-- PROLIFIC_PID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study)
-- STUDY_ID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study)
-- SESSION_ID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study)
+- PROLIFIC_PID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study on the Prolific platform)
+- STUDY_ID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study on the Prolific platform)
+- SESSION_ID: one of the parameters sent by Prolific (option needs to be enabled when setting up the study on the Prolific platform)
