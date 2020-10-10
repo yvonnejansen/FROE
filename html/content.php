@@ -62,8 +62,22 @@
 
   if (isset($_GET["DEBUG"]) || isset($_GET["debug"])) {
     $is_debug = 1;
+    $participant_id = 'DEBUG'; 
+    $study_id = "DEBUG";
+    $session_id = 0;
+    $missing_parameters = false;
   }  else {
     $is_debug = 0;
+  }
+
+  if (isset($_GET["PILOT"]) || isset($_GET["pilot"])) {
+    $is_pilot = 1;
+    $participant_id = '_' . base_convert(mt_rand() / mt_getrandmax(), 10, 36); // generating a random but unique ID
+    $study_id = "pilot";
+    $session_id = 0;
+    $missing_parameters = false;
+  }  else {
+    $is_pilot = 0;
   }
 
 ?>
