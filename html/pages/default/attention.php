@@ -16,7 +16,7 @@
     <p>Which of the following topics was presented in this study?</p>
     <?php
     $att_ans = 1;
-    foreach ($ATTENTION_QUESTION_OPTIONS as $key => $value) {
+    foreach ($config["attention_question_answers"] as $key => $value) {
       ?>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="att" id="att-ans-<?php echo $att_ans;?>" value="<?php echo $key;?>">
@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 
-$('input[type="radio"]').on('click', function() {
+$('input:radio[name="att"]').on('click', function() {
     if ($('input[type="radio"][name="att"]').is(':checked')) {
     $("#btn_<?php echo $id;?>").prop('disabled', false);
   } else {
@@ -47,16 +47,17 @@ $('body').on('next', function(e, type){
   // console.log("next");
   if (type === '<?php echo $id;?>'){
     var att_answer = $('input[name=att]:checked').val();
-    if(att_answer != "<?php echo $ATT_CORRECT_ANSWER ?>"){
+    if(att_answer != "<?php echo $config["attention_question_correct_answer"]["key"] ?>"){
       excluded = true;
       $('body').trigger('excluded');
       // console.log("failed on attention check --> exclude");
-      $('#<?php echo $next ?>').hide().promise().done(() => $('#excluded').show());
+      $('#<?php echo $next ?>').hide().promise().done(() => $('#attention_check_failed').show());
       $(":button").hide();
     } else {
       // console.log("passed on attention check");
-      $('#<?php echo $id ?>').hide().promise().done(() => $('#<?php echo $next ?>').show());
+      // $('#<?php echo $id ?>').hide().promise().done(() => $('#<?php echo $next ?>').show());
   }
+
 }
 });
 

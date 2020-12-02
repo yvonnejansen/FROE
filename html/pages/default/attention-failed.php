@@ -8,7 +8,7 @@
     </p>
 
     <p id="att_failed">
-      We asked <em>which topic (from a list) was presented in this study</em>. The right answer was <em style="color: green"><?php echo $ATTENTION_QUESTION_OPTIONS[$ATT_CORRECT_ANSWER];?></em> but you chose <em style="color: red"><span id="att_answer"></em>.
+      We asked <em>which topic (from a list) was presented in this study</em>. The right answer was <em style="color: green"><?php echo $config["attention_question_correct_answer"]["value"];?></em> but you chose <em style="color: red"><span id="att_answer"></span></em>.
     </p>
     <p>For our research study to be valid, it is critical for us to get reliable data. To get reliable data, we need to make sure that our participants read all instructions. Your response to the previous attention check is an indication that you may not have paid full attention to all our instructions.</p>
     <p>Please feel free to contact the requester if you have any question or complaint.</p>
@@ -16,27 +16,19 @@
 </div>
 
 <script type="text/javascript">
+  
 
-  answers = {
-    <?php
-      $options_counter = 0;
-      foreach ($ATTENTION_QUESTION_OPTIONS as $key => $value) {
-        echo '"' . $key . '": "' . $value . '"';
-        if ($options_counter < count($ATTENTION_QUESTION_OPTIONS) - 1) echo ', ' . PHP_EOL;
-        $options_counter++;
-      }
-    ?>
-  };
+  answers = config.attention_question_answers;
 
-  $('input[type="radio"]').on('click', function() {
+  $('input:radio[name="att"]').on('click', function() {
     var att_answer = $('input[name=att]:checked').val();
-
-    $("#att_answer").text(answers[att_answer]);
-
-    if (att_answer != "<?php echo $ATT_CORRECT_ANSWER ?>") {
-      $("#att_failed").show();
+    $("#att_answer").html(answers[att_answer]);
+    console.log("setting the answer " + answers[att_answer]);
+    if (att_answer != "<?php echo $config["attention_question_correct_answer"]["key"] ?>") {
+      // $("#attention_check_failed").show();
     } else {
-      $("#att_failed").hide();
+      // $("#attention_check_failed").hide();
     }
   });
+
 </script>

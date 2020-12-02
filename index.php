@@ -61,7 +61,29 @@
   </div>
   <main class="container-fluid" id="content">
     <div class="row justify-content-center">
-      <iframe id="experiment" src="html/content.php?<?php echo http_build_query($_GET);?>"></iframe>
+      <?php
+      require_once "html/setup/functions.php";
+      loadConfig();
+ 
+      if ($config["use_fixed_frame"]){
+        ?>
+        <style type="text/css">
+            .background {
+              background-color: #E0E0E0;
+            }
+        </style>      
+      <iframe id="experiment" src="content.php?<?php echo http_build_query($_GET);?>"></iframe>
+
+      <?php 
+      } else {
+        ?>
+
+        <?php
+
+        include("content.php");
+
+      }
+      ?>
     </div>
   </main>
       <noscript>

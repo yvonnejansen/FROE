@@ -1,0 +1,66 @@
+{
+  "welcome" : {
+    "id" : "welcome",
+    "button_text" : "Next",
+    "page_path" : "pages/default/welcome.php",
+    "disabled" : false,
+    "start_page" : true
+  },
+  "consent" : {
+    "id" : "consent",
+    "next" : "description",
+    "button_text" : "I agree. Start the experiment.",
+    "page_path" : "pages/default/consent.php",
+    "disabled" : false,
+    "start_page" : false
+  },
+  "description" : {
+    "id" : "description",
+    "button_text" : "I agree. Start the experiment.",
+    "page_path" : "pages/default/description.php",
+    "disabled" : false,
+    "start_page" : false
+  },
+  "main_stimulus" : {
+    "id" : "main_stimulus",
+    "button_text" : "Next",
+    "page_path" : "pages/custom/main_stimulus.php",
+    "disabled" : true,
+    "start_page" : false
+  },
+  "comprehension" : {
+    "id" : "comprehension",
+    "button_text" : "Confirm",
+    "page_path" : "pages/custom/comprehension.php",
+    "disabled" : true,
+    "start_page" : false
+  },
+  "attention_check" : {
+    "id" : "attention",
+    "button_text" : "Continue",
+    "page_path" : "pages/default/attention.php",
+    "disabled" : true,
+    "start_page" : false
+  },
+  "attention_check_failed" : {
+    "id" : "attention_check_failed",
+    "button_text" : " ",
+    "page_path" : "pages/default/attention-failed.php",
+    "disabled" : false,
+    "start_page" : false
+  },
+  "feedback" : {
+    "id" : "feedback",
+    "button_text" : "Finish",
+    "page_path" : "pages/default/feedback.php",
+    "disabled" : false,
+    "start_page" : false
+  },
+  "end" : {
+    "id" : "end",
+    "button_text" : " ",
+    "page_path" : "pages/default/end.php",
+    "disabled" : true,
+    "start_page" : false
+  }
+}

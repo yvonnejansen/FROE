@@ -5,11 +5,3 @@ export const MIN_WINDOW_WIDTH = 900;
 export const MIN_WINDOW_HEIGHT = 700;
 export const CANVAS_WIDTH = 750;
 
-
-// These are constants for layout purposes.
-
-export const BIG_SPACE = 100;
-export const MEDIUM_SPACE = 40;
-export const SMALL_SPACE = 10;
-
-// Add your own parameters below.

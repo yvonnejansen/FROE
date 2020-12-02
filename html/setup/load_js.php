@@ -5,7 +5,7 @@
  */
   -->
 
- <script type="module" src="js/tools/helper.js" charset="utf-8"></script>
+ <script type="module" src="html/js/tools/helper.js" charset="utf-8"></script>
 
 <!-- You can also load additional css here if needed -->
 
@@ -17,8 +17,8 @@
   //  - $factor2 (if defined)
 
   // Example
-  if ($factor1 == $FACTOR_LEVELS["factor1"]["levels"][0]){ 
-    echo '<script type="module" src="js/visualizations/condition1.js" charset="utf-8"></script>' . PHP_EOL;
+  if ($factor1 == $config["factors"][0]["levels"][0]){ 
+    echo '<script type="module" src="html/js/visualizations/condition1.js" charset="utf-8"></script>' . PHP_EOL;
   } else {
-    echo '<script type="module" src="js/visualizations/condition2.js" charset="utf-8"></script>' . PHP_EOL;
+    echo '<script type="module" src="html/js/visualizations/condition2.js" charset="utf-8"></script>' . PHP_EOL;
   }?>

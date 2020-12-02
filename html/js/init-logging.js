@@ -43,7 +43,7 @@ $('body').on('next', function(e, type){
   // Adapt this number if your consent form is shown on a different page.
   if (page_number === '2') {
     $.ajax({
-      url: 'ajax/agreed.php',
+      url: 'html/ajax/agreed.php',
       type: 'POST',
       data: JSON.stringify(measurements),
       contentType: 'application/json',
@@ -56,7 +56,7 @@ $('body').on('next', function(e, type){
 
   // the below is for intermediary logging of the completion of each page. Deactivate if not needed.
   $.ajax({
-    url: 'ajax/log.php',
+    url: 'html/ajax/log.php',
     type: 'POST',
     data: JSON.stringify(measurements),
     contentType: 'application/json',
@@ -72,7 +72,7 @@ $('body').on('next', function(e, type){
 $('body').on('finished', function(e, type){
   if (!excluded) {
     $.ajax({
-      url: 'ajax/results.php',
+      url: 'html/ajax/results.php',
       type: 'POST',
       data: JSON.stringify(measurements),
       contentType: 'application/json',
@@ -93,7 +93,7 @@ $('body').on('excluded', function(e, type){
   measurements["excluded"] = true;
   window.onbeforeunload = null;
   $.ajax({
-    url: 'ajax/excluded.php',
+    url: 'html/ajax/excluded.php',
     type: 'POST',
     data: JSON.stringify(measurements),
     contentType: 'application/json',
@@ -111,7 +111,7 @@ $('body').on('reloaded', function(e, type){
   measurements["excluded"] = true;
   window.onbeforeunload = null;
   $.ajax({
-    url: 'ajax/excluded.php',
+    url: 'html/ajax/excluded.php',
     type: 'POST',
     data: JSON.stringify(measurements),
     contentType: 'application/json',

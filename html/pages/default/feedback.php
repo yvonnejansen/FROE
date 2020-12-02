@@ -2,7 +2,7 @@
   <div class="col">
     <form class="mt-2" action="" method="post">
       <div class="row">
-        <h2>Final question</h2>
+        <h2>Comments?</h2>
       </div>
       <div class="row mt-4">
         <div class="form-group">

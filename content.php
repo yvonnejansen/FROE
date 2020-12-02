@@ -6,15 +6,15 @@
   <title></title>
 
   <!-- Loads all styles -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="html/css/bootstrap.min.css">
+  <link rel="stylesheet" href="html/css/main.css">
 
   <!-- Loads all libraries -->
-  <script src="js/lib/jquery-3.3.1.min.js"></script>
-  <script src="js/lib/d3.min.js"></script>
-  <script src="js/lib/bootstrap.min.js"></script>
-  <script src="js/lib/bowser-2.4.0-es5.js"></script>
-  <script type="module" src="js/lib/seedrandom.min.js"></script>
+  <script src="html/js/lib/jquery-3.3.1.min.js"></script>
+  <script src="html/js/lib/d3.min.js"></script>
+  <script src="html/js/lib/bootstrap.min.js"></script>
+  <script src="html/js/lib/bowser-2.4.0-es5.js"></script>
+  <script type="module" src="html/js/lib/seedrandom.min.js"></script>
 
 </head>
 <body>
@@ -40,25 +40,16 @@
   </div>
 
 <?php
-    $missing_parameters = false;
-  // get URL parameters sent by Prolific
-  if (isset($_GET["PROLIFIC_PID"])) {
-    $participant_id = $_GET["PROLIFIC_PID"];
-  } else {
-    $missing_parameters = true;
-  }
+  require_once "html/setup/functions.php";
+  loadConfig();
 
-  if (isset($_GET["STUDY_ID"])){
-    $study_id = $_GET["STUDY_ID"];
-  } else {
-    $missing_parameters = true;
-  }
 
-  if (isset($_GET["SESSION_ID"])) {
-    $session_id = $_GET["SESSION_ID"];
-  } else {
-    $missing_parameters = true;
-  }
+  // Read in the GET parameters to determine if we are in debug or pilot mode and if not, to recover data required for the log files
+
+  $missing_parameters = false;
+
+  $is_pilot = 0;
+  $is_debug = 0;
 
   if (isset($_GET["DEBUG"]) || isset($_GET["debug"])) {
     $is_debug = 1;
@@ -66,26 +57,40 @@
     $study_id = "DEBUG";
     $session_id = 0;
     $missing_parameters = false;
-  }  else {
-    $is_debug = 0;
-  }
-
-  if (isset($_GET["PILOT"]) || isset($_GET["pilot"])) {
+  }  else if (isset($_GET["PILOT"]) || isset($_GET["pilot"])) {
     $is_pilot = 1;
     $participant_id = '_' . base_convert(mt_rand() / mt_getrandmax(), 10, 36); // generating a random but unique ID
     $study_id = "pilot";
     $session_id = 0;
     $missing_parameters = false;
-  }  else {
-    $is_pilot = 0;
-  }
+}  else {  
+    // we're running a real participant. Get URL parameters sent by Prolific
+    if (isset($_GET["PROLIFIC_PID"])) {
+      $participant_id = $_GET["PROLIFIC_PID"];
+    } else {
+      $missing_parameters = true;
+    }
 
+    if (isset($_GET["STUDY_ID"])){
+      $study_id = $_GET["STUDY_ID"];
+    } else {
+      $missing_parameters = true;
+    }
+
+    if (isset($_GET["SESSION_ID"])) {
+      $session_id = $_GET["SESSION_ID"];
+    } else {
+      $missing_parameters = true;
+    }
+}
+if ($is_debug > 0 || $is_pilot > 0){
   if (isset($_GET["condition"])) {
     $order_value = $_GET["condition"];
   }
   if (isset($_GET["page"])) {
     $start_page = max(1, intval($_GET["page"]));
   }
+}
 
 ?>
   <div class ="container" id="missing-parameter-container" style="display:none;">
@@ -100,18 +105,17 @@
 
 
 <?php
-require "setup/constants.php";
-require "setup/functions.php";
-require "setup/pages_behavior.php";
 
-assignFactorLevels();
+// TODO this is a very limited mechanism for now
+  randomAssignment();
 
 
-  $condition = $factor1 . "_" . $factor2;
+  $condition = $factor1;
 
 
-  // The following lines create a log file name "all_who_started.csv" which contains a timestamp and participants id for all people who requested the page. This is mainly useful for debugging purposes to figure where something went wrong. It can also be used to detect if someone reloaded the page.
-  $starter_filename = "../results/requested.csv";
+  // The following lines create a log file name "requested.csv" which contains a timestamp and participants id for all people who requested the page. This is mainly useful for debugging purposes to figure where something went wrong. It can also be used to detect if someone reloaded the page.
+  
+  $starter_filename = "results/requested.csv";
   $exists = file_exists($starter_filename);
   $starter_file = fopen($starter_filename, "a+");
 
@@ -140,49 +144,56 @@ assignFactorLevels();
   echo '<input type="hidden" id="study_id" value="' . "" . $study_id .  '"</input>';
   echo '<input type="hidden" id="session_id" value="' . "" . $session_id .  '"</input>';
   echo '<input type="hidden" id="condition" value="' . "" . $condition .  '"</input>';
-  if (!is_null($factor1)){
-    echo '<input  type="hidden" 
-                  id="' . $FACTOR_LEVELS["factor1"]["name"]  . '" value="' . "" . $factor1 .  '"</input>';
-  }
-
-  if (!is_null($factor2)){
-    echo '<input type="hidden" id="' . $FACTOR_LEVELS["factor2"]["name"]  . '" value="' . "" . $factor2 .  '"</input>';
-  }
   echo '<input type="hidden" id="is_debug" value="' . "" . $is_debug .  '"</input>';
-  echo '<input type="hidden" id="exclude_reloaders" value="' . "" . $EXCLUDE_RELOADERS .  '"</input>';
+  echo '<input type="hidden" id="exclude_reloaders" value="' . "" . $config["exclude_reloaders"] .  '"</input>';
 
 ?>
 </div>
+<script type="text/javascript">
+    var config = <?php echo file_get_contents("html/setup/config.json");?>;
 
+</script>
 <?php
 
   // variable to collect the ids of the pages to hide at the beginning
-  $pages_to_hide = "";
+  $pages_to_hide = array();
 
   // generate all pages listed in the PAGE_ORDER constant
-  for ($i=0; $i < count($PAGE_ORDER); $i++) {
-       $button = $PAGE_ORDER[$i]["button"];
-       $id = $PAGE_ORDER[$i]["id"];
+  for ($i=0; $i < count($page_order); $i++) {
+       $id = $page_order[$i];
+       $button = $pages[$id]["button_text"];
        $page_number = $i + 1;
-       // if ($i>0){
-        $pages_to_hide .= '#' . $id;
-       // }
-       if ($i < count($PAGE_ORDER)-1){
-        $pages_to_hide .= ", ";
+       if(!$pages[$id]["start_page"]){
+         $pages_to_hide[] = '#' . $id;
        }
-       $next = $PAGE_ORDER[$i]["next"];
-       $page = $PAGE_ORDER[$i]["page"];
-       $disabled = $PAGE_ORDER[$i]["disabled"];
-       include "page_skeleton.php";
+       if ($i < count($page_order) - 1){
+         $next = $page_order[$i+1];
+
+       } else {
+        $next = ' ';
+       }
+       $page = $pages[$id]["page_path"];
+       $disabled = $pages[$id]["disabled"];
+       include "html/page_skeleton.php";
      }
+
+     // generate the attention check failed page in case we need it
+       $id = "attention_check_failed";
+       $button = $pages[$id]["button_text"];
+       $page_number = -1;
+       $pages_to_hide[] = '#' . $id;
+       $next = null;
+       $page = $pages[$id]["page_path"];
+       include "html/page_skeleton.php";
+
 ?>
 
 
   </main>
 
-  <script src="js/init-logging.js" charset="utf-8"></script>
+  <script src="html/js/init-logging.js" charset="utf-8"></script>
   <script type="text/javascript">
-
+    console.log(config.use_fixed_frame);
     var is_debug = $('#is_debug').val();
     console.log("Debugging --> " + is_debug);
     if (is_debug) console.log("condition: " + $('#condition').val());
@@ -230,12 +241,13 @@ assignFactorLevels();
       }
     }
 
-    $('<?php echo $pages_to_hide;?>').hide();
+    $('<?php echo implode(',' , $pages_to_hide);?>').hide();
     <?php  
     if (isset($start_page)){
-      echo "$('#" . $PAGE_ORDER[$start_page - 1]["id"] . "').show();";
+      echo "$('#" . $page_order[0] . "').hide();";
+      echo "$('#" . $page_order[$start_page - 1] . "').show();";
     } else {
-      echo "$('#" . $PAGE_ORDER[0]["id"] . "').show();";
+      echo "$('#" . $page_order[0] . "').show();";
     }
     ?>
 
@@ -253,7 +265,7 @@ assignFactorLevels();
   </script>
   
   <?php
-  require "setup/load_js.php";
+  require "html/setup/load_js.php";
   ?>
   
 </body>

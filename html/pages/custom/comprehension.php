@@ -1,5 +1,5 @@
 <div class="row">
-    <p style="margin-top: 15px"><img id="people" src="img/jpg/20people.jpg" /></p>
+    <p style="margin-top: 15px"><img id="people" src="html/img/jpg/20people.jpg" /></p>
     <div class="task-description">
         <p>Suppose the findings reported by the pharmaceutical company are accurate. Imagine a group of 20 people who would <strong>all</strong> get the common cold without the medication. Now suppose we give the medication to all of them.</p>
         <h2 class="legend">How many do you think will still get the common cold?</h2>

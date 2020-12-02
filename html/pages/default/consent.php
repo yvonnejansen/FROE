@@ -3,7 +3,7 @@
       <h2>Information Notice and Informed Consent</h2>
       <?php
         $warning_text='<strong>You need to scroll</strong> the page to see the remaining content.';
-        include 'components/warning.php';
+        include 'html/components/warning.php';
       ?>
       <div class="consent">
         <p>
@@ -40,7 +40,7 @@
           <b>What do we expect from you:</b>
         </p>
         <p>
-          If you agree to participate in the study, you will be shown [...] and will be asked questions such as [...]. The entire experiment will take approximately <?php echo $EXP_DURATION ?> minutes.
+          If you agree to participate in the study, you will be shown [...] and will be asked questions such as [...]. The entire experiment will take approximately <?php echo $config["Prolific"]["experiment_duration"]; ?> minutes.
         </p>
         <p>
           <b>Your rights to withdraw from the experiment at any time:</b>
@@ -60,7 +60,7 @@
           <b>Potential benefits:</b>
         </p>
         <p>
-          You will receive £<?php echo sprintf('%0.2f', $EXP_PAYMENT); ?> for participating in this experiment, under the condition that you complete the experiment, do not rush through the experiment, and answer the attention check questions correctly (if any). If attention check questions are present, they will be easy if you pay attention to the experiment.
+          You will receive £<?php echo sprintf('%0.2f', $config["Prolific"]["payment"]); ?> for participating in this experiment, under the condition that you complete the experiment, do not rush through the experiment, and answer the attention check questions correctly (if any). If attention check questions are present, they will be easy if you pay attention to the experiment.
         </p>
         <p>
           <b>Risks and discomforts:</b>
