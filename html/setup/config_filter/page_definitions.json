@@ -1,0 +1,67 @@
+{
+  "welcome" : {
+    "id" : "welcome",
+    "button_text" : "Next",
+    "page_path" : "pages/default/welcome.php",
+    "disabled" : false,
+    "start_page" : true,
+    "save_page" : false
+  },
+  "consent" : {
+    "id" : "consent",
+    "button_text" : "I agree. Start the experiment.",
+    "page_path" : "pages/default/consent.php",
+    "disabled" : false,
+    "start_page" : false,
+    "save_page" : false
+  },
+  "description" : {
+    "id" : "description",
+    "button_text" : "I understand. Let's start.",
+    "page_path" : "pages/default/description_filter_example.php",
+    "disabled" : false,
+    "start_page" : false,
+    "save_page" : false
+  },
+  "main_stimulus" : {
+    "id" : "main_stimulus",
+    "button_text" : "Next",
+    "page_path" : "pages/custom/stimulus_page.php",
+    "repetitions" : 2,
+    "disabled" : true,
+    "start_page" : false,
+    "save_page" : false
+  },
+  "attention_check" : {
+    "id" : "attention_check",
+    "button_text" : "Continue",
+    "page_path" : "pages/default/attention.php",
+    "disabled" : true,
+    "start_page" : false,
+    "save_page" : false
+  },
+  "attention_check_failed" : {
+    "id" : "attention_check_failed",
+    "button_text" : " ",
+    "page_path" : "pages/default/attention-failed.php",
+    "disabled" : false,
+    "start_page" : false,
+    "save_page" : false
+  },
+  "feedback" : {
+    "id" : "feedback",
+    "button_text" : "Finish",
+    "page_path" : "pages/default/feedback.php",
+    "disabled" : false,
+    "start_page" : false,
+    "save_page" : true
+  },
+  "end" : {
+    "id" : "end",
+    "button_text" : " ",
+    "page_path" : "pages/default/end.php",
+    "disabled" : true,
+    "start_page" : false,
+    "save_page" : false
+  }
+}

@@ -63,6 +63,7 @@
     <div class="row justify-content-center">
       <?php
       require_once "html/setup/functions.php";
+      global $config;
       loadConfig();
  
       if ($config["use_fixed_frame"]){

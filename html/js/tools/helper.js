@@ -1,10 +1,10 @@
 
-export function scaleCanvas(canvas, context, width, height) {
+function scaleCanvas(canvas, context, width, height) {
   // assume the device pixel ratio is 1 if the browser doesn't specify it
-  const devicePixelRatio = window.devicePixelRatio || 1;
+  var devicePixelRatio = window.devicePixelRatio || 1;
 
   // determine the 'backing store ratio' of the canvas context
-  const backingStoreRatio = (
+  var backingStoreRatio = (
     context.webkitBackingStorePixelRatio ||
     context.mozBackingStorePixelRatio ||
     context.msBackingStorePixelRatio ||
@@ -13,7 +13,7 @@ export function scaleCanvas(canvas, context, width, height) {
   );
 
   // determine the actual ratio we want to draw at
-  const ratio = devicePixelRatio / backingStoreRatio;
+  var ratio = devicePixelRatio / backingStoreRatio;
 
   if (devicePixelRatio !== backingStoreRatio) {
     // set the 'real' canvas size to the higher width/height
@@ -36,4 +36,7 @@ export function scaleCanvas(canvas, context, width, height) {
   context.scale(ratio, ratio);
 }
 
-
+function changeImageSrc(img, newsrc) {
+  // console.log("setting source of " + $(img).attr('src') +  " to " + newsrc);
+  $(img).attr("src", newsrc);
+}

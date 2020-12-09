@@ -54,7 +54,8 @@
     "button_text" : "Finish",
     "page_path" : "pages/default/feedback.php",
     "disabled" : false,
-    "start_page" : false
+    "start_page" : false,
+    "save_page" : true
   },
   "end" : {
     "id" : "end",

@@ -4,7 +4,7 @@
     <p>A large pharmaceutical company has recently developed a new drug to boost peoples' immune function. It reports that trials it conducted demonstrated a drop of forty percent (from eighty seven to forty seven percent) in occurrence of the common cold. It intends to market the new drug as soon as next winter, following FDA approval.</p>
 
     <?php if ($condition == $config["factors"][0]["levels"][1]) {
-      echo '<p><img id="graph" src="html/img/jpg/exp1_graph.jpg"></p>';
+      echo '<p><img id="graph" src="html/img/base_example/exp1_graph.jpg"></p>';
     }
     ?>
 

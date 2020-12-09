@@ -13,7 +13,7 @@
     measurements["browser_name"] = browserInfo.getBrowserName();
     measurements["browser_version"] = browserInfo.getBrowserVersion();
     measurements["os"] = browserInfo.getOSName();
-
+    var trial_log = [];
 
 
 
@@ -21,13 +21,14 @@ var excluded = false;
 
 // save timestamps each time "next" is clicked
 $('body').on('next', function(e, type){
+  if (is_debug) console.log("Event: next, page id: " + type);
   window.scrollTo(0, 0); // Make sure that every page is presented from the top (without it, longer pages start at the middle of the page)
   var page_number = $('#page_' + type).val();
   // console.log("page number" + page_number);
   // If someone accepts the informed consent, we consider them participants and they cannot reload the page nor finish later.
   // write the cookie checking for the state
   // add a warning when they try to reload
-  if (page_number > 1 && $('#is_debug') < 1) {
+  if (page_number > 1 && !is_debug) {
     document.cookie = "accepted=1;max-age=" + 60*60*24*14;
     window.onbeforeunload = function() {
       alert('Reloading or closing the window will lead to exclusion from the experiment.');
@@ -54,15 +55,22 @@ $('body').on('next', function(e, type){
     });
   }
 
-  // the below is for intermediary logging of the completion of each page. Deactivate if not needed.
+  var save_trial_log = false;
+  if ('save_trial_log' in config){
+    if(config.save_trial_log){
+      save_trial_log = true;
+    }
+  }
   $.ajax({
     url: 'html/ajax/log.php',
     type: 'POST',
-    data: JSON.stringify(measurements),
+    data: save_trial_log ? JSON.stringify(trial_log) : JSON.stringify(measurements),
     contentType: 'application/json',
     success: function (data) {
-      // console.log('Page: ' + page_number);
-      // console.log(measurements);
+      console.log("Triggered page log: " + JSON.stringify(data));
+          
+        
+      
     }
   });
 
@@ -70,6 +78,25 @@ $('body').on('next', function(e, type){
 
 // send data upon 'finished' event
 $('body').on('finished', function(e, type){
+  if (is_debug) console.log("Event: finished. Triggering log file save.");
+  if ('save_trial_log' in config){
+    if(config.save_trial_log){
+      if (!excluded) {
+        $.ajax({
+          url: 'html/ajax/trial_log.php',
+          type: 'POST',
+          data: JSON.stringify(trial_log),
+          contentType: 'application/json',
+          success: function (data) {
+            console.log("Experiment finished.");
+            console.log(data);
+            $(":button").hide();
+            window.onbeforeunload = null;
+          }
+        });
+      }
+    }
+  }
   if (!excluded) {
     $.ajax({
       url: 'html/ajax/results.php',
@@ -78,12 +105,14 @@ $('body').on('finished', function(e, type){
       contentType: 'application/json',
       success: function (data) {
         console.log("Experiment finished.");
-        $('#completion_code').html(data);
+        console.log(data);
         $(":button").hide();
         window.onbeforeunload = null;
       }
     });
   }
+
+  
 });
 
 // send message upon 'excluded' event
