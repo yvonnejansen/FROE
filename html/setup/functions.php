@@ -187,13 +187,15 @@ function generatePages() {
      }
 
      // Outside the loop: generate the attention check failed page in case the participant fails the check
-       $id = "attention_check_failed";
-       $button = $pages[$id]["button_text"];
-       $page_number = -1;
-       $page_ids[] = '#' . $id;
-       $next = null;
-       $page = $pages[$id]["page_path"];
-       include "html/page_skeleton.php";
+       if (array_key_exists("attention_check_failed", $pages)){
+         $id = "attention_check_failed";
+         $button = $pages[$id]["button_text"];
+         $page_number = -1;
+         $page_ids[] = '#' . $id;
+         $next = null;
+         $page = $pages[$id]["page_path"];
+         include "html/page_skeleton.php";
+       }
 
 }
   ?>
