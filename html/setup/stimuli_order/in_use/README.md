@@ -1,0 +1,1 @@
+Stimuli order files will be moved to this directory when selected for a participant. If they don't finish within the timeout time set in the config.json file, then the file will be moved back when the unused directory is empty and a new request arrives.
