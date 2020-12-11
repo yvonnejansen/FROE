@@ -173,7 +173,7 @@ function generatePages() {
           }
           // the next few lines are specific to the image filter example.
           // Custom variables can be easily added here. Just make sure to check whether variables you need to access actually exist (use isset($var) for this purpose).
-         if($rep > 1){
+         if($rep > 1 && isset($stimuli_order)){
           $src = 'html/img/filter_example/'. $stimuli_order[$j] . ".jpg";
           $filter = $stimuli_order[$j] % 10;
           $image = floor($stimuli_order[$j]/10);
