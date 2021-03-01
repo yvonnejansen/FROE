@@ -40,9 +40,8 @@ $('body').on('next', function(e, type){
   var event_name = 'timestamp_' + page_number;
   measurements[event_name] = Date.now();
 
-  // Setting this to page number 2 makes the assumption that the consent form is shown on page 2 and that anyone confirming page 2 consents to participating.
-  // Adapt this number if your consent form is shown on a different page.
-  if (page_number === '2') {
+  // Setting the consent_page_number to 2 makes the assumption that the consent form is shown on page 2 and that anyone confirming page 2 consents to participating.
+  if (+page_number === +config.consent_page_number) {
     $.ajax({
       url: 'html/ajax/agreed.php',
       type: 'POST',
