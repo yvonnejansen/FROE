@@ -10,6 +10,8 @@ Three people contributed to the code in this framework:
 - Pierre Dragicevic
 - Yvonne Jansen
 
+
+
 ## Features
 - Integration with the Prolific platform
 	- Participants don't need to enter their id manually and can click a link to validate the completion of the study on the platform.
@@ -26,6 +28,14 @@ Three people contributed to the code in this framework:
 - Checking of browser versions and ensuring minimum versions before admitting participants.
 - Ensuring a certain minimum window size of the window displaying the study so that the minimum size is respected for all browser types and display sizes of participants.
 - Automatic exclusion of participants who reload the page once they accepted the consent form, unless configured otherwise.
+
+## How to get started
+
+The template contains two demo studies to get you started. You can switch between different projects by renaming directories: the framework will by default use the project described within the directory 'html/setup/config'. The default study is based on [this work](https://www.aviz.fr/visualcensoring) and the second one is based on [this work](https://aviz.fr/blinded). The default one is an example for a repeated trial experiment (participants see the same base page multiple times with different stimuli) whereas the second example (config-blinded) is an example of a multi-page experiment where all participants go through multiple different pages and where some content on each page can be adjusted depending on the assigned condition.
+
+To get started, either clone this repository, or if you stay within github, use the ''use this template'' function to generate your own version of this repository from which you can then edit. Then start a php server with the main directory of the repo as the root directory (so that index.php is at the base level), and you should be able to view the example project in your browser under an address like [localhost:8080/?debug].
+
+Before starting to make changes, make sure to have read the description of the file system below; especially concerning the directories pages and setup. Comments within the files should help understand how the framework works and how to adapt the existing code to your case.
 
 ## How to use this framework
 There are four steps to use this framework for the preparation of a study:
@@ -73,9 +83,7 @@ This framework is meant as a template and structured as follows
 	- individual: directory containing individual log files for each participant
 	- results.csv: Your results will end up in this file. It doesn't exist until at least one person completes the experiment.
 
-## How to get started
 
-The template contains a demo study based on [this work](https://aviz.fr/blinded) to get you started. Make sure to have read the description of the file system above; especially concerning the directories pages and setup. Comments within the files should help understand how the framework works and how to adapt the existing code to your case.
 
 ## URL parameters
 

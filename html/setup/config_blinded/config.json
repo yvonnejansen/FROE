@@ -1,5 +1,5 @@
 {
-  "use_fixed_frame" : false,
+  "use_fixed_frame" : true,
   "frame_size" : {
     "width" : 900,
     "height" : 700
@@ -16,6 +16,7 @@
       ]
     }
   ],
+  "consent_page_number" : 2,
   "exclude_reloaders" : true,
   "attention_question_answers" : {
     "malaria" : "People getting malaria",
@@ -34,15 +35,6 @@
     "value" : "People getting the common cold"
   },
   "page_id_triggering_final_log" : "feedback",
-  "stimulus_timing" : {
-    "initial_mask_time" : 500,
-    "stimulus_time" : 2000
-  },
-  "save_trial_log" : true,
-  "stimuli_order_files" : {
-    "time_out" : 45,
-    "directory_name" : "stimuli_order",
-    "read_stimuli_order_from_files" : true
-  },
-  "css_file_name" : "main_filter_example.css"
+  "save_trial_log" : false,
+  "css_file_name" : "main.css"
 }
