@@ -1,3 +1,7 @@
+# Update (2025)
+This project is no longer under active development and there are now actively developed alternatives, notably the [revisit](https://revisit.dev/about/) framework.
+
+
 # Framework for Running Online Experiments
 FROE is a small framework to help realize online studies with explicit support for Prolific. The only requirement is a server running PHP.
 
